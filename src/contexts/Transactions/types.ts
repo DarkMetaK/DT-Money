@@ -11,6 +11,7 @@ export interface ITransactions {
 
 export interface ITransactionsContextType {
   transactions: ITransactions[];
+  fetchTransactions: (query?: string) => Promise<void>
 }
 
 export interface ITransactionsProviderProps {

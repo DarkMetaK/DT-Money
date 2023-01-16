@@ -113,3 +113,9 @@ export const TransactionTypeButton = styled(RadioGroup.Item)<ITransactionTypeBut
     }
   }
 `
+
+export const ErrorMessage = styled.p`
+  color: ${props => props.theme["red-300"]};
+  margin-bottom: .5rem;
+  margin-top: -.5rem;
+`

@@ -1,22 +1,11 @@
-import { useContext } from 'react';
 import { ArrowCircleDown, ArrowCircleUp, CurrencyDollar } from 'phosphor-react';
+import { useSummary } from '../../hooks/useSummary';
 
-import { TransactionsContext } from '../../contexts/Transactions/TransactionsContext';
 import { Card, SummaryContainer } from "./styles";
 
 export function Summary() {
 
-  const { transactions } = useContext(TransactionsContext)
-
-  const totalIncome = transactions.filter(item => item.type === 'income')
-  .reduce((acc, item) => {
-    return acc += item.price
-  }, 0)
-
-  const totalOutcome = transactions.filter(item => item.type === 'outcome')
-  .reduce((acc, item) => {
-    return acc += item.price
-  }, 0)
+  const {totalIncome, totalOutcome, totalBalance} = useSummary()
 
   return (
     <SummaryContainer>
@@ -47,7 +36,7 @@ export function Summary() {
           <span>Total</span>
           <CurrencyDollar size={32} color="#fff"/>
         </header>
-        <strong>{(totalIncome - totalOutcome).toLocaleString('default', {
+        <strong>{totalBalance.toLocaleString('default', {
           style: 'currency',
           currency: 'BRL'
         })}</strong>

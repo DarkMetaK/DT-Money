@@ -10,14 +10,18 @@
     "api": "json-server server.json -w -d 500"
   },
   "dependencies": {
+    "@hookform/resolvers": "^2.9.10",
     "@radix-ui/react-dialog": "^1.0.2",
     "@radix-ui/react-radio-group": "^1.1.0",
     "@types/styled-components": "^5.1.26",
+    "axios": "^1.2.2",
     "phosphor-react": "^1.4.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.42.1",
     "react-router-dom": "^6.6.2",
-    "styled-components": "^5.3.6"
+    "styled-components": "^5.3.6",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@types/react": "^18.0.26",

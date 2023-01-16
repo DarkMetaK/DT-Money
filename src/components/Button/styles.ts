@@ -19,9 +19,14 @@ export const MainButton = styled.button<IMainButton>`
   line-height: 1.6rem;
   cursor: pointer;
 
-  &:hover{
+  &:not(:disabled):hover{
     background-color: ${props => props.theme["green-700"]};
     transition: background-color 0.2s;
+  }
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
   }
 
   padding: ${props => PaddingOptions[props.size]}

@@ -7,14 +7,21 @@ export const TransactionsContext = createContext({} as ITransactionsContextType)
 export function TransactionsProvider({children}: ITransactionsProviderProps) {
   const [transactions, setTransactions] = useState<ITransactions[]>([]);
 
+  async function fetchTransactions(query?:string) {
+    const url = new URL('http://localhost:3000/transactions');
+
+    query && url.searchParams.append('q', query);
+
+    const data = await (await fetch(url)).json();
+    setTransactions(data);
+  }
+
   useEffect(() => {
-    fetch('http://localhost:3000/transactions')
-    .then(response => response.json())
-    .then(response => setTransactions(response!))
+    fetchTransactions();
   }, [])
 
   return (
-    <TransactionsContext.Provider value={{transactions}}>
+    <TransactionsContext.Provider value={{transactions, fetchTransactions}}>
       {children}
     </TransactionsContext.Provider>
   )
