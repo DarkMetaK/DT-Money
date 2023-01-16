@@ -27,3 +27,20 @@ export const HeaderContent = styled.div`
     }
   }
 `
+
+export const HeaderButton = styled.button`
+  border: none;
+  background-color: ${props => props.theme["green-500"]};
+  color: ${props => props.theme.white};
+  border-radius: 6px;
+  font-weight: bold;
+  line-height: 1.6rem;
+  cursor: pointer;
+
+  &:hover{
+    background-color: ${props => props.theme["green-700"]};
+    transition: background-color 0.2s;
+  }
+
+  padding: 0.75rem 1.25rem;
+`

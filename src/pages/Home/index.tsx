@@ -1,10 +1,21 @@
+import { useEffect, useState } from "react";
 import { Header } from "../../components/Header";
 import { SearchBar } from "../../components/SearchBar";
 import { Summary } from "../../components/Summary";
 
 import { PriceHighLight, TransactionsContainer, TransactionTable } from "./styles";
+import { ITransactions } from "./types";
 
 export function Home() {
+
+  const [transactions, setTransactions] = useState<ITransactions[]>([]);
+
+  useEffect(() => {
+    fetch('http://localhost:3000/transactions')
+    .then(response => response.json())
+    .then(response => setTransactions(response!))
+  }, [])
+
   return (
     <>
       <Header />
@@ -14,60 +25,24 @@ export function Home() {
       <TransactionsContainer>
         <TransactionTable>
           <tbody>
-            <tr>
-              <td width='50%'>Desenvolvimento de site</td>
-              <td>
-                <PriceHighLight variant="income">
-                  R$ 12.000,00 
-                </PriceHighLight>  
-              </td>
-              <td>Venda</td>
-              <td>13/04/2022</td>
-            </tr>
-
-            <tr>
-              <td width='50%'>Hamburguer</td>
-              <td>
-                <PriceHighLight variant="outcome">
-                  - R$ 59,00 
-                </PriceHighLight>  
-              </td>
-              <td>Alimentação</td>
-              <td>10/04/2022</td>
-            </tr>
-            
-            <tr>
-              <td width='50%'>Aluguel do apartamento</td>
-              <td>
-                <PriceHighLight variant="outcome">
-                  - R$ 1.200,00
-                </PriceHighLight>  
-              </td>
-              <td>Casa</td>
-              <td>27/03/2022</td>
-            </tr>
-
-            <tr>
-              <td width='50%'>Computador</td>
-              <td>
-                <PriceHighLight variant="income">
-                  R$ 5.400,00 
-                </PriceHighLight>  
-              </td>
-              <td>Venda</td>
-              <td>15/03/2022</td>
-            </tr>
-
-            <tr>
-              <td width='50%'>Desenvolvimento de site</td>
-              <td>
-                <PriceHighLight variant="income">
-                  R$ 8.000,00
-                </PriceHighLight>  
-              </td>
-              <td>Venda</td>
-              <td>13/03/2022</td>
-            </tr>
+            {transactions && transactions.map(item => {
+              return (
+                <tr key={item.id}>
+                  <td width='50%'>{item.description}</td>
+                  <td>
+                    <PriceHighLight variant={item.type}>
+                      {item.price.toLocaleString('default', {
+                        style: 'currency',
+                        currency: 'BRL'
+                      })}
+                    </PriceHighLight>
+                  </td>
+                  <td>{item.category}</td>
+                  <td>{new Date(item.createdAt).toLocaleDateString().split(' ')[0]}</td>
+                </tr>
+              )
+              }
+            )}
           </tbody>
         </TransactionTable>
       </TransactionsContainer>

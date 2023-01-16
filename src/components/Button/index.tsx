@@ -2,7 +2,6 @@ import { ButtonHTMLAttributes, ReactNode } from "react"
 import { MainButton } from "./styles"
 
 interface IButton extends ButtonHTMLAttributes<HTMLButtonElement>{
-  children: ReactNode
   size?: 'sm' | 'md' | 'lg'
 }
 
