@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const SearchBarContainer = styled.form`
   width: 100%;
@@ -12,22 +12,22 @@ export const SearchBarContainer = styled.form`
   input {
     flex: 1;
     padding: 1rem;
-    color: ${props => props.theme["gray-300"]};
-    background-color: ${props => props.theme["gray-900"]};
+    color: ${(props) => props.theme['gray-300']};
+    background-color: ${(props) => props.theme['gray-900']};
     border: none;
     border-radius: 6px;
-    
+
     &::placeholder {
-      color: ${props => props.theme["gray-500"]};
+      color: ${(props) => props.theme['gray-500']};
     }
   }
 
   button[type='submit'] {
     padding: 0.875rem 2rem;
-    color: ${props => props.theme["green-300"]};
+    color: ${(props) => props.theme['green-300']};
     cursor: pointer;
     background-color: transparent;
-    border: 1px solid ${props => props.theme["green-300"]};
+    border: 1px solid ${(props) => props.theme['green-300']};
     border-radius: 6px;
 
     display: flex;
@@ -38,10 +38,10 @@ export const SearchBarContainer = styled.form`
       opacity: 0.7;
       cursor: not-allowed;
     }
-    
+
     &:not(:disabled):hover {
-      background-color: ${props => props.theme["green-500"]};
-      color: ${props => props.theme.white};
+      background-color: ${(props) => props.theme['green-500']};
+      color: ${(props) => props.theme.white};
       transition: background-color, color 0.2s;
     }
   }

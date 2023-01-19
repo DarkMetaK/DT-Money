@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "api": "json-server server.json -w -d 500"
+    "api": "json-server server.json -w -d 500",
+    "lint": "eslint src --ext .ts,.tsx",
+    "lint:fix": "eslint src --ext .ts,.tsx --fix"
   },
   "dependencies": {
     "@hookform/resolvers": "^2.9.10",
@@ -24,9 +26,11 @@
     "yup": "^0.32.11"
   },
   "devDependencies": {
+    "@rocketseat/eslint-config": "^1.1.3",
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.9",
     "@vitejs/plugin-react": "^3.0.0",
+    "eslint": "^8.32.0",
     "json-server": "^0.17.1",
     "typescript": "^4.9.3",
     "vite": "^4.0.0"

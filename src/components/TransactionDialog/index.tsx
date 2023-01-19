@@ -1,58 +1,81 @@
-import { useForm, Controller } from "react-hook-form";
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from "yup";
-import * as Dialog from '@radix-ui/react-dialog';
-import { ArrowCircleDown, ArrowCircleUp, X } from 'phosphor-react';
+import { useContext } from 'react'
+import { useForm, Controller } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import * as yup from 'yup'
+import * as Dialog from '@radix-ui/react-dialog'
+import { ArrowCircleDown, ArrowCircleUp, X } from 'phosphor-react'
 
-import { Button } from '../Button';
-import { ErrorMessage, TransactionClose, TransactionContent, TransactionForm, TransactionOverlay, TransactionTitle, TransactionType, TransactionTypeButton } from './styles';
-
+import { TransactionsContext } from '../../contexts/Transactions/TransactionsContext'
+import { Button } from '../Button'
+import {
+  ErrorMessage,
+  TransactionClose,
+  TransactionContent,
+  TransactionForm,
+  TransactionOverlay,
+  TransactionTitle,
+  TransactionType,
+  TransactionTypeButton,
+} from './styles'
 
 interface INewTransactionForm {
-  description: string,
-  price: number,
-  category: string,
+  description: string
+  price: number
+  category: string
   type: 'income' | 'outcome'
 }
 
 export function TransactionDialog() {
+  const { createNewTransaction } = useContext(TransactionsContext)
 
   const schema = yup.object({
     description: yup.string().required('Esse campo é obrigatório'),
-    price: yup.number().min(0.1, 'O valor deve ser superior a 0').required('Esse campo é obrigatório').typeError('O valor inserido deve ser um número'),
+    price: yup
+      .number()
+      .min(0.1, 'O valor deve ser superior a 0')
+      .required('Esse campo é obrigatório')
+      .typeError('O valor inserido deve ser um número'),
     category: yup.string().required('Esse campo é obrigatório'),
-    type: yup.string().required('O tipo da transação é obrigatório')
+    type: yup.string().required('O tipo da transação é obrigatório'),
   })
 
-  const { register, handleSubmit, formState: { errors, isValid, isSubmitting }, control } = useForm<INewTransactionForm>({
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isValid, isSubmitting },
+    control,
+  } = useForm<INewTransactionForm>({
     resolver: yupResolver(schema),
     mode: 'onChange',
     defaultValues: {
-      type: "income"
-    }
-  });
+      type: 'income',
+    },
+  })
 
-  async function handleNewTransactionSubmit (data: INewTransactionForm) {
-    await new Promise(resolve => setTimeout(resolve, 2000))
-    console.log(data);
+  async function handleNewTransactionSubmit(data: INewTransactionForm) {
+    await createNewTransaction(data)
+    reset()
   }
 
   return (
     <Dialog.Portal>
-      <TransactionOverlay/>
+      <TransactionOverlay />
       <TransactionContent>
         <TransactionTitle>Nova Transação</TransactionTitle>
         <TransactionForm onSubmit={handleSubmit(handleNewTransactionSubmit)}>
           <input
             type="text"
-            placeholder='Descrição'
+            placeholder="Descrição"
             required
             {...register('description')}
           />
-          {errors.description && <ErrorMessage>{errors.description.message}</ErrorMessage>}
+          {errors.description && (
+            <ErrorMessage>{errors.description.message}</ErrorMessage>
+          )}
           <input
             type="number"
-            placeholder='Preço'
+            placeholder="Preço"
             required
             {...register('price')}
             min={0}
@@ -60,23 +83,28 @@ export function TransactionDialog() {
           {errors.price && <ErrorMessage>{errors.price.message}</ErrorMessage>}
           <input
             type="text"
-            placeholder='Categoria'
+            placeholder="Categoria"
             required
             {...register('category')}
           />
-          {errors.category && <ErrorMessage>{errors.category.message}</ErrorMessage>}
+          {errors.category && (
+            <ErrorMessage>{errors.category.message}</ErrorMessage>
+          )}
 
           <Controller
             control={control}
-            name='type'
-            render={({field}) => {
+            name="type"
+            render={({ field }) => {
               return (
-                <TransactionType onValueChange={field.onChange} value={field.value}>
-                  <TransactionTypeButton variant='income' value='income'>
+                <TransactionType
+                  onValueChange={field.onChange}
+                  value={field.value}
+                >
+                  <TransactionTypeButton variant="income" value="income">
                     <ArrowCircleUp size={24} />
                     Entrada
                   </TransactionTypeButton>
-                  <TransactionTypeButton variant='outcome' value='outcome'>
+                  <TransactionTypeButton variant="outcome" value="outcome">
                     <ArrowCircleDown size={24} />
                     Saída
                   </TransactionTypeButton>
@@ -86,14 +114,15 @@ export function TransactionDialog() {
           />
           {errors.type && <ErrorMessage>{errors.type.message}</ErrorMessage>}
 
-          <Button type='submit' size='lg' disabled={!isValid || isSubmitting}>Cadastrar</Button>
+          <Button type="submit" size="lg" disabled={!isValid || isSubmitting}>
+            Cadastrar
+          </Button>
         </TransactionForm>
 
         <TransactionClose>
-          <X size={24}/>
+          <X size={24} />
         </TransactionClose>
       </TransactionContent>
-
     </Dialog.Portal>
   )
 }

@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components'
 
 export const SummaryContainer = styled.section`
   width: 100%;
@@ -11,7 +11,6 @@ export const SummaryContainer = styled.section`
   gap: 2rem;
 
   margin-top: -5rem;
-
 `
 
 interface ICard {
@@ -19,7 +18,7 @@ interface ICard {
 }
 
 export const Card = styled.div<ICard>`
-  background-color: ${props => props.theme["gray-600"]};
+  background-color: ${(props) => props.theme['gray-600']};
   padding: 2rem;
   border-radius: 6px;
 
@@ -31,16 +30,18 @@ export const Card = styled.div<ICard>`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    color: ${props => props.theme["gray-300"]};
+    color: ${(props) => props.theme['gray-300']};
   }
 
   strong {
     font-size: 2rem;
     line-height: 1.4rem;
-    color: ${props => props.theme["gray-100"]};
+    color: ${(props) => props.theme['gray-100']};
   }
 
-  ${props => props.variant === 'green' && css`
-  background-color: ${props => props.theme["green-700"]}
-  `}
+  ${(props) =>
+    props.variant === 'green' &&
+    css`
+      background-color: ${(props) => props.theme['green-700']};
+    `}
 `
