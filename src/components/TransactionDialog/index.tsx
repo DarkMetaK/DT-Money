@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContextSelector } from 'use-context-selector'
 import { useForm, Controller } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
@@ -26,7 +26,12 @@ interface INewTransactionForm {
 }
 
 export function TransactionDialog() {
-  const { createNewTransaction } = useContext(TransactionsContext)
+  const createNewTransaction = useContextSelector(
+    TransactionsContext,
+    (context) => {
+      return context.createNewTransaction
+    },
+  )
 
   const schema = yup.object({
     description: yup.string().required('Esse campo é obrigatório'),
