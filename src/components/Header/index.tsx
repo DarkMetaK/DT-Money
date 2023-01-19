@@ -2,7 +2,7 @@ import * as Dialog from '@radix-ui/react-dialog'
 import { TransactionDialog } from '../TransactionDialog'
 import { HeaderButton, HeaderContainer, HeaderContent } from './styles'
 
-import logo from '../../assets/logo-ignite.svg'
+import logo from '../../assets/logo-Ignite.svg'
 
 export function Header() {
   return (
