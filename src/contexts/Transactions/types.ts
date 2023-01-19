@@ -3,7 +3,7 @@ import { ReactNode } from 'react'
 export interface ITransactions {
   id: number
   description: string
-  type: 'income' | 'outcome'
+  type: string
   category: string
   price: number
   createdAt: string
@@ -13,7 +13,7 @@ export interface INewTransaction {
   description: string
   price: number
   category: string
-  type: 'income' | 'outcome'
+  type: string
 }
 
 export interface ITransactionsContextType {
