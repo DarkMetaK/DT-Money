@@ -26,6 +26,16 @@ export const HeaderContent = styled.div`
       font-weight: bold;
     }
   }
+
+  @media (max-width: 420px) {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+
+    button {
+      align-self: center;
+    }
+  }
 `
 
 export const HeaderButton = styled.button`
