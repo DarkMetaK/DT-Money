@@ -21,7 +21,9 @@ export const TransactionContent = styled(Dialog.Content)`
   padding: 3rem;
   animation: contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
 
-  min-width: 32rem;
+  max-width: 32rem;
+  width: calc(100% - 1rem);
+  margin-right: 1rem;
 `
 
 export const TransactionTitle = styled(Dialog.Title)`
@@ -73,6 +75,10 @@ export const TransactionType = styled(RadioGroup.Root)`
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
   margin-top: 0.5rem;
+
+  @media (max-width: 420px) {
+    grid-template-columns: 1fr;
+  }
 `
 
 interface ITransactionTypeButton {

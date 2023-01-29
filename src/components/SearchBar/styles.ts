@@ -45,4 +45,12 @@ export const SearchBarContainer = styled.form`
       transition: background-color, color 0.2s;
     }
   }
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+
+    button[type='submit'] {
+      justify-content: center;
+    }
+  }
 `
