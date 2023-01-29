@@ -11,6 +11,11 @@ export const SummaryContainer = styled.section`
   gap: 2rem;
 
   margin-top: -5rem;
+
+  @media (max-width: 980px) {
+    grid-template-columns: 80%;
+    justify-content: center;
+  }
 `
 
 interface ICard {
@@ -44,4 +49,14 @@ export const Card = styled.div<ICard>`
     css`
       background-color: ${(props) => props.theme['green-700']};
     `}
+
+  @media (max-width: 480px) {
+    strong {
+      font-size: 1.5rem;
+    }
+    svg {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+  }
 `
